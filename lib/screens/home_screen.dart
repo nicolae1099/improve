@@ -1,6 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:improve/customUi/reusable_list_item.dart';
+import '../constants/colors.dart' as color;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -48,7 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return ReusableListItem(
-                      const Color(0xFFd2fddf), items[index]);
+                      Colors
+                          .primaries[Random().nextInt(Colors.primaries.length)],
+                      Colors
+                          .primaries[Random().nextInt(Colors.primaries.length)],
+                      items[index]);
                 },
                 itemCount: items.length,
               ),
