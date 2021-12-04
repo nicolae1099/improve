@@ -59,15 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          createAlertDialog(context).then((onValue) {
-            setState(() {
-              if (onValue.isNotEmpty) {
-                items.add(onValue);
-              }
-            });
-          });
-        },
+        onPressed: () {},
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: CustomBottomNavigation(
