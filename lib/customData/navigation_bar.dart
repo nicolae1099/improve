@@ -13,7 +13,7 @@ class NavigationBarConstants {
     ),
     NavigationBarItemModel(
       iconType: Icons.add,
-      label: "Add",
+      label: "Addd",
     ),
     NavigationBarItemModel(
       iconType: Icons.bubble_chart,
