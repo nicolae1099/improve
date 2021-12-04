@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:improve/customUi/reusable_list_item.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -57,33 +60,13 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           createAlertDialog(context).then((onValue) {
             setState(() {
-              items.add(onValue);
+              if (onValue.isNotEmpty) {
+                items.add(onValue);
+              }
             });
           });
         },
         child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class ReusableListItem extends StatelessWidget {
-  const ReusableListItem(this.colour, this.pill, {Key? key}) : super(key: key);
-
-  final Color colour;
-  final String pill;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      margin: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        color: colour,
-        borderRadius: BorderRadius.circular(15.0),
-      ),
-      child: Center(
-        child: Text(pill),
       ),
     );
   }
