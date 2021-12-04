@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:improve/customData/navigation_bar.dart';
+import 'package:improve/customUi/custom_bottom_navigation_bar.dart';
 import 'package:improve/customUi/reusable_list_item.dart';
 import '../constants/colors.dart' as color;
 
@@ -74,6 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
         child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: CustomBottomNavigation(
+        barItems: NavigationBarConstants.barItems,
       ),
     );
   }
