@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:improve/model/navigation_bar_item_model.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
-  final Map<Icon, String> items;
-  const CustomBottomNavigation({Key? key, required this.items})
+  final List<NavigationBarItemModel> barItems;
+  const CustomBottomNavigation({Key? key, required this.barItems})
       : super(key: key);
 
   @override
@@ -12,16 +13,14 @@ class CustomBottomNavigation extends StatefulWidget {
 
 class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
   int _selectedIndex = 0;
-  List<Icon> addictionList = List<Icon>.from(
-      widget.items.entries.map((MapEntry mapEntry) => mapEntry.value).toList());
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       type: BottomNavigationBarType.fixed,
-      items: widget.items.forEach((k,v) => {
-        return BottomNavigationBarItem()
-      });
-        widget.items.map((key, value) => BottomNavigationBarItem(icon: null)),
+      items: widget.barItems
+          .map((e) =>
+              BottomNavigationBarItem(icon: Icon(e.iconType), label: e.label))
+          .toList(),
       currentIndex: _selectedIndex,
       selectedItemColor: Colors.amber[800],
       onTap: _onItemTapped,
