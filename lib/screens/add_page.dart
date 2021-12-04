@@ -9,15 +9,6 @@ class AddPage extends StatefulWidget {
 }
 
 class _AddPageState extends State<AddPage> {
-  final myController = TextEditingController();
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,12 +18,7 @@ class _AddPageState extends State<AddPage> {
         body: Column(
           children: [
             Row(
-              children: [
-                const Text("Name:"),
-                TextFormField(
-                  controller: myController,
-                )
-              ],
+              children: [const Text("Name:"), TextFormField()],
             ),
           ],
         ));
