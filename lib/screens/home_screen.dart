@@ -1,6 +1,11 @@
+import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:improve/customData/navigation_bar.dart';
+import 'package:improve/customUi/custom_bottom_navigation_bar.dart';
 import 'package:improve/customUi/reusable_list_item.dart';
+import 'package:improve/screens/add_page.dart';
+import '../constants/colors.dart' as color;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,29 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<String> items = [];
-
-  Future<String> createAlertDialog(BuildContext context) async {
-    TextEditingController customController = TextEditingController();
-    return await showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("Name of the Habit"),
-            content: TextField(
-              controller: customController,
-            ),
-            actions: <Widget>[
-              MaterialButton(
-                  elevation: 5.0,
-                  child: const Text("OK"),
-                  onPressed: () {
-                    Navigator.of(context).pop(customController.text
-                        .toString()); // to go back to screen after submitting
-                  })
-            ],
-          );
-        });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +30,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return ReusableListItem(
-                      const Color(0xFFd2fddf), items[index]);
+                      Colors
+                          .primaries[Random().nextInt(Colors.primaries.length)],
+                      Colors
+                          .primaries[Random().nextInt(Colors.primaries.length)],
+                      items[index]);
                 },
                 itemCount: items.length,
               ),
@@ -58,15 +44,13 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          createAlertDialog(context).then((onValue) {
-            setState(() {
-              if (onValue.isNotEmpty) {
-                items.add(onValue);
-              }
-            });
-          });
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddPage()));
         },
         child: const Icon(Icons.add),
+      ),
+      bottomNavigationBar: CustomBottomNavigation(
+        barItems: NavigationBarConstants.barItems,
       ),
     );
   }
