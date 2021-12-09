@@ -42,12 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
               child: ListView.builder(
                 itemBuilder: (context, index) {
-                  return ReusableListItem(
-                      Colors
-                          .primaries[Random().nextInt(Colors.primaries.length)],
-                      Colors
-                          .primaries[Random().nextInt(Colors.primaries.length)],
-                      items[index].name);
+                  return ReusableListItem(items[index].color,
+                      items[index].color, items[index].name);
                 },
                 itemCount: items.length,
               ),
@@ -56,9 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: CustomBottomNavigation(
-          barItems: NavigationBarConstants.barItems,
-          data: widget.data,
-          homeScreen: widget),
+        barItems: NavigationBarConstants.barItems,
+        data: widget.data,
+        refresh: updateState,
+      ),
     );
   }
 }

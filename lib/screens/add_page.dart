@@ -7,8 +7,8 @@ import '../dataManagement/data.dart';
 
 class AddPage extends StatefulWidget {
   final Data data;
-  final HomeScreen homePage;
-  const AddPage({Key? key, required this.data, required this.homePage})
+  final Function() refresh;
+  const AddPage({Key? key, required this.data, required this.refresh})
       : super(key: key);
 
   @override
@@ -109,7 +109,7 @@ class _AddPageState extends State<AddPage> {
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             widget.data.addTask(taskname, selectedUser!.color);
-            widget.homePage.createState();
+            widget.refresh();
           },
           backgroundColor: Colors.blue,
           child: const Icon(Icons.add)),

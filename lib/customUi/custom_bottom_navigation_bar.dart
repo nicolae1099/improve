@@ -8,12 +8,12 @@ import '../dataManagement/data.dart';
 class CustomBottomNavigation extends StatefulWidget {
   final List<NavigationBarItemModel> barItems;
   final Data data;
-  final HomeScreen homeScreen;
+  final Function() refresh;
   const CustomBottomNavigation(
       {Key? key,
       required this.barItems,
       required this.data,
-      required this.homeScreen})
+      required this.refresh})
       : super(key: key);
 
   @override
@@ -44,7 +44,7 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    AddPage(data: widget.data, homePage: widget.homeScreen)));
+                    AddPage(data: widget.data, refresh: widget.refresh)));
       }
     });
   }
