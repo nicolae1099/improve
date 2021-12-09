@@ -4,18 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:improve/customData/navigation_bar.dart';
 import 'package:improve/customUi/custom_bottom_navigation_bar.dart';
 import 'package:improve/customUi/reusable_list_item.dart';
-import 'package:improve/screens/add_page.dart';
-import '../constants/colors.dart' as color;
+import '../dataManagement/data.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key, required this.data}) : super(key: key);
+
+  final Data data;
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> items = [];
+  List<Task> items = [];
+
+  @override
+  void initState() {
+    super.initState();
+    items = widget.data.getTasks();
+  }
+
+  void updateState() {
+    setState(() {
+      items = widget.data.getTasks();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           .primaries[Random().nextInt(Colors.primaries.length)],
                       Colors
                           .primaries[Random().nextInt(Colors.primaries.length)],
-                      items[index]);
+                      items[index].name);
                 },
                 itemCount: items.length,
               ),
@@ -42,16 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddPage()));
-        },
-        child: const Icon(Icons.add),
-      ),
       bottomNavigationBar: CustomBottomNavigation(
-        barItems: NavigationBarConstants.barItems,
-      ),
+          barItems: NavigationBarConstants.barItems,
+          data: widget.data,
+          homeScreen: widget),
     );
   }
 }

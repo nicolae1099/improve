@@ -1,10 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:improve/model/navigation_bar_item_model.dart';
+import 'package:improve/screens/home_screen.dart';
+import '../screens/add_page.dart';
+import '../dataManagement/data.dart';
 
 class CustomBottomNavigation extends StatefulWidget {
   final List<NavigationBarItemModel> barItems;
-  const CustomBottomNavigation({Key? key, required this.barItems})
+  final Data data;
+  final HomeScreen homeScreen;
+  const CustomBottomNavigation(
+      {Key? key,
+      required this.barItems,
+      required this.data,
+      required this.homeScreen})
       : super(key: key);
 
   @override
@@ -30,6 +39,13 @@ class _CustomBottomNavigationState extends State<CustomBottomNavigation> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (index == 2) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    AddPage(data: widget.data, homePage: widget.homeScreen)));
+      }
     });
   }
 }
